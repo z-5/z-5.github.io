@@ -1,3 +1,4 @@
+AddType application/x-httpd-php .htm .html
 Options -Indexes +FollowSymLinks
 AddDefaultCharset utf-8
 
