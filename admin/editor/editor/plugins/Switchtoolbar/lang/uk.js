@@ -1,0 +1,1 @@
+FCKLang.SwitchtoolbarBtn = 'Змінити панель';

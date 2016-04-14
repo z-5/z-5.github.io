@@ -1,0 +1,24 @@
+﻿// FLV Player Dialog
+FCKLang["DlgFLVS3PlayerTitle"]          = "AVE FLV Media Player v1.1";
+FCKLang["DlgFLVS3PlayerVideoFile"]		= "Flv видео-аудиофайл";
+FCKLang["DlgFLVS3PlayerURL"]            = "Ссылка на видео-аудио файлы форматов: FLV, F4V, MP4, MOV, M4A, MP4V, 3GP и 3G2, MP3, H.264.(допускается ввести URL внешнего сервера)" ;
+FCKLang["DlgFLVS3PlayerCommentURL"]     = "Комментарий к файлу (исполнитель, имя файла и т.п.), вывод в левом верхнем углу плеера, если Вы не хотите его использовать, оставьте это поле пустым." ;
+FCKLang["DlgFLVS3PlayerImgURL"]         = "Изображение заставки - превью, если Вы не хотите его использовать, оставьте это поле пустым." ;
+FCKLang["DlgFLVS3PlayerPlayerAttrs"]    = "Настройки проигрывателя";
+FCKLang["DlgFLVS3PlayerWidth"]          = "Ширина (px)" ;
+FCKLang["DlgFLVS3PlayerHeight"]         = "Высота (px)" ;
+FCKLang["DlgFLVS3PlayerAlign"]          = "Расположение" ;
+FCKLang["DlgFLVS3PlayerAlignDefault"]      = "По-умолчанию" ;
+FCKLang["DlgFLVS3PlayerAlignLeft"]      = "По левому краю" ;
+FCKLang["DlgFLVS3PlayerAlignRight"]     = "По правому краю" ;
+FCKLang["DlgFLVS3PlayerAlignCenter"]    = "По центру" ;
+FCKLang["DlgFLVS3PlayerInternalFileStyle"]		= "Использовать встроенный файл со стилями";
+FCKLang["DlgFLVS3PlayerExternalFileStyle"]		= "Загрузить внешний файл со стилями";
+FCKLang["DlgFLVS3PlayerExternalPlaylist"]		= "Снимите чекбокс, что-бы разрешить использовать файл - плейлист";
+FCKLang["DlgFLVS3PlayerLoadPlaylist"]		= "Загрузить внешний файл - плейлист (допускается ввести URL внешнего сервера)";
+FCKLang["DlgFLVS3PlayerBtnBrowse"]      = "Обзор..." ;
+FCKLang["DlgFLVS3PlayerBtnSelect"]      = "Выбрать...";
+FCKLang["DlgFLVS3PlayerAlertUrl"]       = "Выберите видео-аудио файл!";
+FCKLang["DlgFLVS3PlaylistAlertUrl"]     = "Выберите файл - плейлист!";
+FCKLang["DlgFLVS3PlayerAlertWidth"]     = "Введите Ширину";
+FCKLang["DlgFLVS3PlayerAlertHeight"]    = "Введите Высоту";

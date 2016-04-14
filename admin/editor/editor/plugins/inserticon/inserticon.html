@@ -1,0 +1,134 @@
+<!--
+ * Plugin for FSKEditor ----- Insert Icon v1.0 -----
+ * This plugin created by Aleksandr Salnikov
+ * Nick Name: Repellent, team Overdoze.ru 
+ * This file was created August 28, 2011
+-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="robots" content="noindex, nofollow" />
+		<style type="text/css">
+			.CursorIe { cursor: hand ; }
+			.CursorMozilla { cursor: pointer ; }
+			body, td, input, textarea, select, label {font-family: Verdana, Geneva, Arial, helvetica, sans-serif; font-size: 10px; }
+		</style>
+		<script type="text/javascript">
+		
+var oEditor = window.parent.InnerDialogLoaded() ;
+
+function setDefaults()
+{
+	// Переводим тексты диалогового окна
+	oEditor.FCKLanguageManager.TranslatePage(document) ;
+}
+
+function InsertInsertIcon( url )
+{
+	var oImg = oEditor.FCK.CreateElement( 'IMG' ) ;
+	oImg.src = url;
+
+	window.parent.Cancel() ;
+}
+
+function over(td)
+{
+	td.className = 'LightBackground CursorIe CursorMozilla' ;
+}
+
+function out(td)
+{
+	td.className = 'DarkBackground CursorIe CursorMozilla' ;
+}
+		</script>
+	</head>
+	<body onLoad="setDefaults()" scroll="no">
+		<table style=" float:left; position: fixed; background:#FFF; top:0px;" cellpadding="1" cellspacing="1" align="center" border="0" width="564" height="50">
+     		<tbody>
+             <tr>
+              <td nowrap valign="top">
+              <fieldset>
+				<legend><span style="color:#3365B8; font-size:14px;" fcklang="InsertIconSize">Select the icon size</span></legend>
+				<input type='checkbox' id="cb1" name='value1' value='1' checked /><span fckLang="InsertIconSize48">Size_48x48</span>&nbsp;
+				<input type='checkbox' id="cb2" name='value2' value='2' /><span fckLang="InsertIconSize32">Size_32x32</span>&nbsp;
+				<input type='checkbox' id="cb3" name='value3' value='3' /><span fckLang="InsertIconSize24">Size_24x24</span>&nbsp;
+				<input type='checkbox' id="cb4" name='value4' value='4' /><span fckLang="InsertIconSize16">Size_16x16</span>&nbsp; 
+               </fieldset>
+              </td>
+             </tr> 
+			</tbody>
+           </table>
+           <div style="height:45px;">&nbsp;</div>
+           <table cellpadding="2" cellspacing="2" align="center" border="0" width="100%" height="100%">
+            <tbody id="InsertIconContent">
+            
+			</tbody>
+       	</table>
+	</body>
+ <script type="text/javascript">
+// анонимная самовызывающаяся функция, чтобы не засорять глобальное пространство имён
+(function () {
+	var i = 1,
+		element = null,
+		checkboxes = [],
+		$ = function (id) {return document.getElementById(id);};
+
+	// собираем все чекбоксы в массив
+	while (null != (element = $("cb" + i))) {
+		checkboxes.push(element);
+		i += 1;
+	}
+
+	function generateHTML(s) {
+		var FCKConfig        = oEditor.FCKConfig,
+			sSize            = FCKConfig.InsertIconPathSize,
+			sBasePath        = FCKConfig.InsertIconPath,
+			sBasePathPreview = FCKConfig.InsertIconPathPreview,
+			aImages          = FCKConfig.InsertIconImages,
+			cols             = FCKConfig.InsertIconColumns,
+			html             = "";
+
+		for (var i = 0, length = aImages.length; i < length; i += 1) {
+			var sTooltip = aImages[i];
+			if (i % 10 == 0) {
+				html += "<TR>";
+			}
+			if (sTooltip) {
+				var sUrl = sBasePath + sSize[s] + "/" + sTooltip + ".png" ; // Формируем URL к файлу.
+				var sSrc = sBasePathPreview + "preview/" + sTooltip + ".png" ; // Формируем предпросмотр в окне диалога.
+				html += "<TD width='1%' align='center' class='DarkBackground CursorIe CursorMozilla' onclick='InsertInsertIcon(\"" + sUrl.replace(/"/g, '\\"' ) + "\")' onmouseover='over(this)' onmouseout='out(this)'>";
+				html  += "<img title='" + sTooltip + "' src='" + sSrc + "' border='0'>";
+			} else {
+				html += "<TD width='1%' class='DarkBackground'>&nbsp;";
+			}
+			html += "</TD>";
+			if (i % 10 == 9 || i == length - 1) {
+				html += "</TR>";
+			}
+		}
+		return html;
+	}
+
+	// работаем с чекбоксами
+	for (var i = 0, length = checkboxes.length; i < length; i += 1) {
+		element = checkboxes[i];
+		element.onclick = function () {
+			// обнуляем все чекбоксы
+			var index = -1;
+			for (var i = 0, length = checkboxes.length; i < length; i += 1) {
+				checkboxes[i].checked = false;
+				if (checkboxes[i] == this) {
+					index = i;
+				}
+			}
+			// отмечаем текущий
+			this.checked = true;
+			// генерируем HTML и записываем в нужный элемент
+			$('InsertIconContent').innerHTML = generateHTML(index);
+		}
+		if (element.checked) element.click();
+	}
+})();
+</script>
+</html>

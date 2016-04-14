@@ -1,0 +1,73 @@
+Options -Indexes +FollowSymLinks
+AddDefaultCharset utf-8
+
+# 	php_value error_reporting E_NONE
+
+#	Этот параметр устанавливает максимальное время в секундах, позволяющее скрипту запускаться прежде, чем он завершается синтаксическим анализатором.
+#	php_value max_execution_time 600
+
+#	Максимальное время загрузки данных для скрипта, в том числе и файлов из формы
+#	php_value max_input_time 600
+
+#	Устанавливает максимальный размер файла, который может быть получен методом POST
+#	Рекомендация: в любом случае он должен быть меньше post_max_size.
+#	php_value upload_max_filesize 16M
+
+#	Ограничивает максимальный объем данных, получаемых от пользователя методом POST
+#	php_value post_max_size 20M
+
+#	Включаем у PHP короткие <?
+#	php_value short_open_tag On
+
+<FilesMatch "\.(class|functions|inc|modules|templates|cache|lib|session)$">
+    Order allow,deny
+</FilesMatch>
+
+<IfModule mod_expires.c>
+	ExpiresActive On
+	ExpiresDefault "access plus 60 minutes"
+	ExpiresByType text/html "now"
+</IfModule>
+
+<IfModule mod_rewrite.c>
+	RewriteEngine on
+	RewriteBase /
+
+	#Заглушка для index.php
+	RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.php\ HTTP/
+	RewriteRule ^index\.php$ http://%{HTTP_HOST}/ [R=301,L]
+
+#	Убираем слеш в конце
+#	RewriteCond %{HTTP_HOST} (.*)
+#	RewriteCond %{REQUEST_URI} /$ [NC]
+#	RewriteRule ^(.*)(/)$ $1 [L,R=301]
+
+#	Редирект с www.domain.com на domain.com
+#	http://site
+#	RewriteCond %{HTTP_HOST} ^www\.(.+) [NC]
+#	RewriteRule (.*) http://%1/$1 [R=permanent,L]
+
+#	Редирект с domain.com на www.domain.com
+#	http://www.site
+#	RewriteCond %{HTTP_HOST} !^www\. [NC]
+#	RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [QSA,L]
+
+	RewriteCond %{REQUEST_URI} !^/(class|functions|inc|modules|templates|cache)/
+
+	#Robots
+	RewriteCond %{REQUEST_URI} !^/robots\.txt$ [NC]
+
+	#Sitemap
+	RewriteRule ^sitemap.xml$ inc/sitemap.php [QSA,L]
+
+	## RSS
+	RewriteRule ^rss/rss-([0-9]+).xml$ inc/rss.php?id=$1 [QSA,L]
+
+	RewriteRule \.(ico)$ - [NC,L]
+
+	RewriteRule ^index.php$ - [L]
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule .* index.php [L]
+
+</IfModule>
